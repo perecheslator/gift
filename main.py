@@ -183,6 +183,7 @@ async def starts(msg: types.Message):
 async def admin_panel(msg: types.Message):
 	a = msg.text.split(' ')
 	b = a.remove('/change_text')
+	await msg.answer('Успешно✨')
 	db.check_config_send_msg(' '.join(a))
 
 @dp.message_handler(commands=['admin'])
@@ -253,6 +254,12 @@ async def meet_message_oof_on_call(call: types.CallbackQuery, state: FSMContext)
 	db.change_new_user_admin()
 	await msg.answer('Выберете действие', reply_markup=await keyboard.switch())
 
+@dp.callback_query_handler(text = 'lock_chat')
+async def config_call(call: types.CallbackQuery, state: FSMContext): 
+	msg = call.message
+
+	await msg.delete()
+	#await client.join('https://t.me/+Lk-DSmMwDGQ0MmFi')
 
 
 @dp.callback_query_handler(text = 'config')
@@ -285,6 +292,10 @@ async def gift_pars(msg):
 	global use
 
 	if use == 1:
+		if msg.text == '/close':
+			use = 0
+			await msg.answer('Отменено⚡')
+			return
 		await msg.answer('Дождитесь окончания!')
 		return
 	else:
@@ -307,7 +318,7 @@ async def gift_pars(msg):
 			result_text = f'<b>🌟 Чат: @{chat} | Юзер: @{result_gift[0]["username"]} [id: {result_gift[0]["user_id"]}]</b>\n\n'
 			gifts_text = ""
 			for index, item in enumerate(result_gift):
-				gift_line = f'<b><i>{index + 1}.</i> Gift: {item["gift"]} {result_gift[0]["status"]}</b>\n'
+				gift_line = f'<b><i>{index + 1}.</i> Gift: {item["gift"]} {db.check_gif_name(int(item["gift"]))[0]}</b>\n'
 					
 				if len(result_text + gifts_text + gift_line) <= 4096: # max telegram message size 
 					gifts_text += gift_line

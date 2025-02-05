@@ -14,6 +14,8 @@ from telethon.tl.functions.messages import ImportChatInviteRequest
 from modules import config
 
 
+
+
 async def get_client():
     session = [file for file in os.listdir('session') if file.split('.')[-1] == 'session']
     
@@ -32,6 +34,8 @@ async def get_client():
 
 async def send_msg(username, client):
     await client.send_message(username, db.check_config_send_msg(None))
+
+
 
 async def parse_members(chat: str) -> AsyncGenerator[Dict[str, Any], None]:
     client = await get_client()
@@ -59,7 +63,6 @@ async def parse_members(chat: str) -> AsyncGenerator[Dict[str, Any], None]:
 
 
 
-
 b = 0
 
 async def get_user_gifts(client: Client, user_id: int, username: str):
@@ -75,7 +78,7 @@ async def get_user_gifts(client: Client, user_id: int, username: str):
             #print(a, gift.can_upgrade, gift.is_limited, gift.id)
             
             if gift.id in config.GIFT_IDS:
-            #if 1 == 1:
+            #f git:
                 result.append({"gift": gift.id, "user_id": user_id, "username": username, "status": ')'})
         
         
@@ -86,7 +89,8 @@ async def get_user_gifts(client: Client, user_id: int, username: str):
         return []
 
 
-    print(f'{b} Смотрю: @{username}')
+    #print(f'{b} Смотрю: @{username}')
+
 
     return result
 

@@ -224,3 +224,12 @@ def change_config_send_msg():
 		if check == 'False':
 			c.execute('UPDATE config SET send_msg = ? WHERE send_msg = ?', ('True', 'False'))
 		return 0
+
+def check_gif_name(id):
+	with s.connect('modules/db.db') as db:
+		c = db.cursor()
+
+		name = c.execute('SELECT * FROM gifs WHERE id = ?', (id, )).fetchall()[0][1]
+		use = c.execute('SELECT * FROM gifs WHERE id = ?', (id, )).fetchall()[0][2]
+
+		return name, use

@@ -19,7 +19,7 @@ async def back():
 	markup = InlineKeyboardMarkup()
 	
 	return markup.add(back)
-
+#господи как же я устал....
 async def switch():
 	meet_message = InlineKeyboardButton('💬Встречающая админ панель', callback_data='none')
 
@@ -55,9 +55,11 @@ async def start():
 	btn1 = InlineKeyboardButton('Парсинг пользователей', callback_data = 'pars')
 	btn2 = InlineKeyboardButton('Рассылка по пользователям', callback_data = 'sender')
 	btn3 = InlineKeyboardButton('Конфигурация', callback_data='config')
+	btn4 = InlineKeyboardButton('Парсинг пользователей по закрытым чатам', callback_data='lock_chat')
+	btn5 = InlineKeyboardButton('Автоматический поиск людей', callback_data='auto_search')
 
 	markup = InlineKeyboardMarkup()
-	return markup.add(btn1).add(btn2).add(btn3)
+	return markup.add(btn1).add(btn2).add(btn3)#.add(btn4)#.btn(5)
 
 async def config():
 	btn1 = InlineKeyboardButton('Настройка парсинга пользователей', callback_data = 'config_pars')
